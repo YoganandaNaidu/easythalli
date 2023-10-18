@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Update() {
     const {id} = useParams();
     const navigate = useNavigate();    
     useEffect(() => {
-        axios.get('http://localhost:3001/read/'+id)
+        axios.get(process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + '/read/'+id)
         .then(res => {
             console.log(res);
             setValues({...values, name: res.data[0].name, contactname: res.data[0].contactname, 
@@ -26,7 +27,7 @@ function Update() {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        axios.put('http://localhost:3001/update/'+ id, values)
+        axios.put(process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + '/update/'+ id, values)
         .then(res => {
                         {/*res => console.log(res)*/}
             console.log(res)
@@ -67,6 +68,7 @@ function Update() {
                         onChange={e => setValues({...values, isActive:e.target.value})} />
                 </div>
             <button className="btn btn-success">Update</button>
+            <Link to={`/`} className="btn btn-primary mx-2">Back</Link>
             </form>
         </div>
         </div>

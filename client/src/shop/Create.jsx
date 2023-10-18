@@ -1,23 +1,24 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Create() {
-    const [isChecked, setIsChecked] = useState(false); // Initialize the checkbox state
+    const [isactive, isActive] = useState(false); // Initialize the checkbox state
 
     const [values, setValues] = useState({
         name: '',
         contactname: '',
         contactnumber: '',
         remarks: '',
-        isactive: 0,
+        isActive: 0,
     })
         
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3001/shopcreate', values)
+        axios.post(process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + '/shopcreate', values)
         .then(res => {
             console.log(res)
             navigate('/shop');
@@ -54,10 +55,11 @@ function Create() {
         <div className="mb-2">
             <label htmlFor="">Active</label>
             <input type="checkbox" name="isactive"   // Use the checked attribute to set the value to 1 (true)
-            onChange={e=> setValues({...values,isactive:e.target.checked ? 1 : 0})}/>
+            onChange={e=> setValues({...values, isActive:e.target.checked ? 1 : 0})}/>
         </div>
         
         <button className="btn btn-success">Submit</button>
+        <Link to={`/`} className="btn btn-primary mx-2">Back</Link>
         </form>
     </div>
     </div>

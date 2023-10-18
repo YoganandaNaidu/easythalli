@@ -8,7 +8,7 @@ function Read() {
     const [shop, setShop] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/read/'+id)
+        axios.get(process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + '/read/'+id)
         .then(res => {
             console.log(res);
             setShop(res.data[0]);

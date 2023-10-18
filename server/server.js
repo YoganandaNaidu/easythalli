@@ -1,6 +1,11 @@
 import express from 'express'
 import mysql from 'mysql'
 import cors from 'cors'
+import dotenv from 'dotenv';
+
+dotenv.config();
+const port = process.env.PORT
+const host = process.env.PORT
 
 const app = express();
 app.use(cors());
@@ -10,7 +15,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database:"node_react_1"
+    database:"node_react_1",
 })
 
 app.get('/', (req, res) => {
@@ -66,6 +71,6 @@ app.delete('/delete/:id', (req, res) => {
     })
 })
 
-app.listen(3001, ()=> {
-    console.log('hurray, I am here waiting, listenning @3001..... to Respond :)');
+app.listen(port, ()=> {
+    console.log(`hurray, I am here waiting, listenning @port :${port}..... to Respond.`);
 })

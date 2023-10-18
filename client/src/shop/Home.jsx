@@ -6,13 +6,13 @@ function Home() {
     const [data, setData] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/')
+        axios.get( process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT)
         .then(res => setData(res.data))
-        .catch(err => console.log(err)); 
+        .catch(err => console.log(err));
     },[])
   
     const handleDelete = (id) => {
-        axios.delete('http://localhost:3001/delete/'+id)
+        axios.delete( process.env.REACT_APP_HOST + ":" + process.env.REACT_APP_PORT + '/delete/'+id)
         .then(res => {
             window.location.reload(false);
         })
@@ -56,6 +56,7 @@ function Home() {
                     }
                 </tbody>
             </table>
+            <Link to={`/`} className="btn btn-sm btn-primary mx-2">Back</Link>
         </div>
     </div>
   )

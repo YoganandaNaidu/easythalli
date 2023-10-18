@@ -5,11 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Create from "./Create";
 import Read from "./Read";
 import Update from "./Update";
+import Dashboard from "./Dashboard";
 
-function App() {
+function Shop() {
   return ( 
     <BrowserRouter>
       <Routes>
+        <Route path ='/' element={<Dashboard />} />
         <Route path ='/shop' element={<Home />} />
         <Route path ='/shop/create/' element={<Create />} />
         <Route path ='/shop/read/:id' element={<Read />} />
@@ -19,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default Shop;
