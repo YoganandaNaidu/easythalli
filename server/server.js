@@ -4,18 +4,24 @@ import cors from 'cors'
 import dotenv from 'dotenv';
 
 dotenv.config();
-const port = process.env.PORT
-const host = process.env.PORT
+const app_host = process.env.APP_HOST
+const app_port = process.env.APP_PORT
+
+const db_host = process.env.DB_HOST
+const db_port = process.env.DB_PORT
+const db_user = process.env.DB_USER
+const db_password = process.env.DB_PASSWORD
+const db_name = process.env.DB_NAME
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database:"node_react_1",
+    host: db_host,
+    user: db_user,
+    password: db_password,
+    database: db_name
 })
 
 app.get('/', (req, res) => {
@@ -71,6 +77,6 @@ app.delete('/delete/:id', (req, res) => {
     })
 })
 
-app.listen(port, ()=> {
-    console.log(`hurray, I am here waiting, listenning @port :${port}..... to Respond.`);
+app.listen(app_port, ()=> {
+    console.log(`hurray, I am here waiting, listenning @port :${app_port}.....to Respond.`);
 })
